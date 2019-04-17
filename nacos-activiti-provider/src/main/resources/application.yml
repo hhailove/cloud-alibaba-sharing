@@ -1,0 +1,15 @@
+server:
+  port: 1000
+spring:
+  application:
+    name: activiti-sharing
+#  datasource:
+#    druid:
+#      db-type: com.alibaba.druid.pool.DruidDataSource
+#      url: jdbc:mysql://172.16.2.17:3306/activiti?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#      username: root
+#      password: admin1234
+#      driver-class-name: com.mysql.jdbc.Driver
+  activiti:
+    process-definition-location-prefix: classpath:/processes/
+#    database-schema-update: true

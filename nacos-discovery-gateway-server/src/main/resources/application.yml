@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: nacos-discovery-gateway-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        metadata:
+          name: gateway-server    #元数据 区分服务的机器节点，可以通过与权重配置配合实现灰度发布
+    gateway:     #gateway配置开始
+      routes:
+        - id: nacos-discovery-provider  #目标服务的id名称
+          uri: lb://nacos-discovery-provider  #在nacos里注册的服务名称
+          predicates: #断言 ：以/service/**为请求路径开始的请求都转发到uri（lb://nacos-discovery-provider）上
+            - Path=/provider/**
+          filters:     #添加过滤器
+            - StripPrefix=1     #忽略provider前缀
+        - id: nacos-discovery-consumer
+          uri: lb://nacos-discovery-consumer
+          predicates:
+            - Path=/consumer/**
+          filters:
+            - StripPrefix=1
+server:
+  port: 9100

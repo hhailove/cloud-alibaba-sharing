@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: nacos-config-client-load
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        namespace: c2c2cd03-a049-4dac-983a-27683ef3ae4d  #租户隔离 默认是public 一个租户下可以对应多个组
+        group: HHAIX   #组隔离 默认是DEFAULT_GROUP 此组只针对当前应用的配置文件生效，对shard-dataids 无效
+        shared-dataids: application-common.yml     #加载默认组是DEFAULT_GROUP下公共配置文件 此时组的隔离失效，公共配置文件默认组是DEFAULT_GROUP
+        refreshable-dataids: application-common.yml  #刷新公共配置文件
+  profiles:
+    active: dev
+server:
+  port: 8001
